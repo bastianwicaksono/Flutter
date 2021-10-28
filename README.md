@@ -91,7 +91,6 @@
        home: RandomWords(),
 	      );
 	    }
-	
 2. Lanjutan dari program sebelumnya, menambahkan icon pada setiap nama random yang muncul, menambahkan class _saved sebagai tempat menampung nama favorit
 	class _RandomWordsState extends State<RandomWords> {
 	  final _suggestions = <WordPair>[];
