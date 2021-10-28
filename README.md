@@ -91,3 +91,136 @@
        home: RandomWords(),
 	      );
 	    }
+	
+2. Lanjutan dari program sebelumnya, menambahkan icon pada setiap nama random yang muncul, menambahkan class _saved sebagai tempat menampung nama favorit
+	class _RandomWordsState extends State<RandomWords> {
+	  final _suggestions = <WordPair>[];
+	  final _saved = <WordPair>{};     // NEW
+	  final _biggerFont = TextStyle(fontSize: 18.0);
+	  ...
+	}
+   Menambahkan class alreadySaved agar memastikan nama yang sudah favorit tidak dapat difavoritkan lagi
+	Widget _buildRow(WordPair pair) {
+	  final alreadySaved = _saved.contains(pair);  // NEW
+	  ...
+	}
+   Menambahkan listTitle berisi bentuk icon hati sebagai tanda favorit
+	Widget _buildRow(WordPair pair) {
+	  final alreadySaved = _saved.contains(pair);
+	  return ListTile(
+	    title: Text(
+	      pair.asPascalCase,
+	      style: _biggerFont,
+	    ),
+	    trailing: Icon(   // NEW from here... 
+	      alreadySaved ? Icons.favorite : Icons.favorite_border,
+	      color: alreadySaved ? Colors.red : null,
+	      semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+	    ),                // ... to here.
+	  );
+	}
+  Jika app di reload maka akan dapat dilihat bedanya sekarang sudah ada icon hati
+  Membuat icon hati dapat berinteraksi ketika disentuh 
+	Widget _buildRow(WordPair pair) {
+	  final alreadySaved = _saved.contains(pair);
+	  return ListTile(
+	    title: Text(
+	      pair.asPascalCase,
+	      style: _biggerFont,
+	    ),
+	    trailing: Icon(
+	      alreadySaved ? Icons.favorite : Icons.favorite_border,
+	      color: alreadySaved ? Colors.red : null,
+	      semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+	    ),
+	    onTap: () {      // NEW lines from here...
+	      setState(() {
+		if (alreadySaved) {
+		  _saved.remove(pair);
+		} else { 
+		  _saved.add(pair); 
+		} 
+	      });
+	    },               // ... to here.
+	  );
+	}
+  Sekarang jika disentuh maka icon hati akan berubah warna merah tanda item sudah difavoritkan.
+  Membuat aplikasi dapat berpindah dengan "navigator" dengan kode dibwh ini
+	class _RandomWordsState extends State<RandomWords> {
+	  ...
+	  @override
+	  Widget build(BuildContext context) {
+	    return Scaffold(
+	      appBar: AppBar(
+		title: Text('Startup Name Generator'),
+		actions: [
+		  IconButton(
+		    icon: const Icon(Icons.list),
+		    onPressed: _pushSaved,
+		    tooltip: 'Saved Suggestions',
+		  ),
+		],
+	      ),
+	      body: _buildSuggestions(),
+	    );
+	  }
+	  ...
+	}
+  Menambahakan list favorit sebagai tempat item item favorit
+	void _pushSaved() {
+  }
+	void _pushSaved() {
+	  Navigator.of(context).push(
+	  );
+	}
+ Reload aplikasi maka sekarang sudah bisa dilihat item favoritnya
+	void _pushSaved() {
+    Navigator.of(context).push(
+      // Add lines from here...
+      MaterialPageRoute<void>(
+        builder: (context) {
+          final tiles = _saved.map(
+            (pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+          final divided = tiles.isNotEmpty
+              ? ListTile.divideTiles(
+                  context: context,
+                  tiles: tiles,
+                ).toList()
+              : <Widget>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ), // ...to here.
+    );
+  }
+
+ Membuat tema untuk aplikasi
+	class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Startup Name Generator',
+      theme: ThemeData(          // Add the 5 lines from here... 
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+      ),                         // ... to here.
+      home: RandomWords(),
+    );
+  }
+}
+Reload maka aplikasi sudah dapat diganti temanya
