@@ -36,9 +36,9 @@
       }
     }
    Dalam kode sebelumnya ditambahkan "child: RandomWords()," dibawah baris "child: Text(wordPair.asPascalCase),". Aplikasi kemudian di reload/hot reload yang nantinya akan          memunculkan kata baru setiap di reload. Membuat infinite scroll tambahkan kode ini dalam "class _RandomWordsState extends State<RandomWords>"
-class _RandomWordsState extends State<RandomWords> {
-	final _suggestions = <WordPair>[];
-	final _biggerFont = const TextStyle(fontSize: 18.0);
+	class _RandomWordsState extends State<RandomWords> {
+		final _suggestions = <WordPair>[];
+		final _biggerFont = const TextStyle(fontSize: 18.0);
 	    // ···
 	  }
   _suggestion berfungsi menyimpan sugesti kata yang sudah muncul, sedangkan _biggerfont membuat text lebih besar. Tambahkan _buildSuggestion
