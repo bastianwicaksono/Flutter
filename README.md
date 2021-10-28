@@ -22,7 +22,7 @@
         }
       }
    Program dijalankan dengan media chrome karena belum punya android studio, saat dijalankan akan menampilkan tulisan hello world, selanjutnya menambahkan nama nama baru dengan    mengimport paket/library "english_word" yang berisi banyak kata dalam bahasa inggris. Dalam file pubspec.yaml ditambahkan "english_words: ^4.0.0" agar paket/lib dapat            digunakan, selanjutnya diimport paket/lib tersebut dalam kode "import 'package:english_words/english_words.dart';". Ditambahkan fungsi "final wordPair = WordPair.random();"      untuk memanggil kata random, dalam kode body tulisan hello world digantikan "child: Text(wordPair.asPascalCase)," sebagai tempat text random muncul. Membuat stateful widget 
-    
+   
     class RandomWords extends StatefulWidget {
       @override
       _RandomWordsState createState() => _RandomWordsState();
@@ -55,7 +55,9 @@ Widget _buildSuggestions() {
         return _buildRow(_suggestions[index]);
       });
 }
+	
   berfungsi untuk memanggil kembali kata yang sudah muncul, dalam fungsi ini ada _buildRow berfungsi menampilkan pasangan kata baru agar lebih menarik.
+	
 Widget _buildRow(WordPair pair) {
     return ListTile(
       title: Text(
@@ -91,7 +93,9 @@ Widget _buildRow(WordPair pair) {
        home: RandomWords(),
 	      );
 	    }
+	
 2. Lanjutan dari program sebelumnya, menambahkan icon pada setiap nama random yang muncul, menambahkan class _saved sebagai tempat menampung nama favorit
+	
 class _RandomWordsState extends State<RandomWords> {
 	final _suggestions = <WordPair>[];
 	final _saved = <WordPair>{};     // NEW
@@ -118,8 +122,10 @@ class _RandomWordsState extends State<RandomWords> {
 	    ),                // ... to here.
 	  );
 	}
+	
   Jika app di reload maka akan dapat dilihat bedanya sekarang sudah ada icon hati
   Membuat icon hati dapat berinteraksi ketika disentuh 
+	
 	Widget _buildRow(WordPair pair) {
 	  final alreadySaved = _saved.contains(pair);
 	  return ListTile(
@@ -143,8 +149,10 @@ class _RandomWordsState extends State<RandomWords> {
 	    },               // ... to here.
 	  );
 	}
+	
   Sekarang jika disentuh maka icon hati akan berubah warna merah tanda item sudah difavoritkan.
   Membuat aplikasi dapat berpindah dengan "navigator" dengan kode dibwh ini
+	
 	class _RandomWordsState extends State<RandomWords> {
 	  ...
 	  @override
@@ -207,7 +215,8 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
  Membuat tema untuk aplikasi
-	class MyApp extends StatelessWidget {
+	
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -222,4 +231,5 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 }
+	
 Reload maka aplikasi sudah dapat diganti temanya
