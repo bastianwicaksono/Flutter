@@ -36,13 +36,13 @@
       }
     }
    Dalam kode sebelumnya ditambahkan "child: RandomWords()," dibawah baris "child: Text(wordPair.asPascalCase),". Aplikasi kemudian di reload/hot reload yang nantinya akan          memunculkan kata baru setiap di reload. Membuat infinite scroll tambahkan kode ini dalam "class _RandomWordsState extends State<RandomWords>"
-	  class _RandomWordsState extends State<RandomWords> {
-	    final _suggestions = <WordPair>[];
-	    final _biggerFont = const TextStyle(fontSize: 18.0);
+class _RandomWordsState extends State<RandomWords> {
+	final _suggestions = <WordPair>[];
+	final _biggerFont = const TextStyle(fontSize: 18.0);
 	    // ···
 	  }
   _suggestion berfungsi menyimpan sugesti kata yang sudah muncul, sedangkan _biggerfont membuat text lebih besar. Tambahkan _buildSuggestion
-  Widget _buildSuggestions() {
+Widget _buildSuggestions() {
   return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: /*1*/ (context, i) {
@@ -56,7 +56,7 @@
       });
 }
   berfungsi untuk memanggil kembali kata yang sudah muncul, dalam fungsi ini ada _buildRow berfungsi menampilkan pasangan kata baru agar lebih menarik.
-    Widget _buildRow(WordPair pair) {
+Widget _buildRow(WordPair pair) {
     return ListTile(
       title: Text(
         pair.asPascalCase,
@@ -92,12 +92,12 @@
 	      );
 	    }
 2. Lanjutan dari program sebelumnya, menambahkan icon pada setiap nama random yang muncul, menambahkan class _saved sebagai tempat menampung nama favorit
-	class _RandomWordsState extends State<RandomWords> {
-	  final _suggestions = <WordPair>[];
-	  final _saved = <WordPair>{};     // NEW
-	  final _biggerFont = TextStyle(fontSize: 18.0);
-	  ...
-	}
+class _RandomWordsState extends State<RandomWords> {
+	final _suggestions = <WordPair>[];
+	final _saved = <WordPair>{};     // NEW
+	final _biggerFont = TextStyle(fontSize: 18.0);
+	 ...
+}
    Menambahkan class alreadySaved agar memastikan nama yang sudah favorit tidak dapat difavoritkan lagi
 	Widget _buildRow(WordPair pair) {
 	  final alreadySaved = _saved.contains(pair);  // NEW
