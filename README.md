@@ -21,7 +21,8 @@
           );
         }
       }
-   Program dijalankan dengan media chrome karena belum punya android studio, saat dijalankan akan menampilkan tulisan hello world, selanjutnya menambahkan nama nama baru dengan    mengimport paket/library "english_word" yang berisi banyak kata dalam bahasa inggris. Dalam file pubspec.yaml ditambahkan "english_words: ^4.0.0" agar paket/lib dapat            digunakan, selanjutnya diimport paket/lib tersebut dalam kode "import 'package:english_words/english_words.dart';". Ditambahkan fungsi "final wordPair = WordPair.random();"       untuk memanggil kata random, dalam kode body tulisan hello world digantikan "child: Text(wordPair.asPascalCase)," sebagai tempat text random muncul. Membuat stateful widget 
+   Program dijalankan dengan media chrome karena belum punya android studio, saat dijalankan akan menampilkan tulisan hello world, selanjutnya menambahkan nama nama baru dengan    mengimport paket/library "english_word" yang berisi banyak kata dalam bahasa inggris. Dalam file pubspec.yaml ditambahkan "english_words: ^4.0.0" agar paket/lib dapat            digunakan, selanjutnya diimport paket/lib tersebut dalam kode "import 'package:english_words/english_words.dart';". Ditambahkan fungsi "final wordPair = WordPair.random();"      untuk memanggil kata random, dalam kode body tulisan hello world digantikan "child: Text(wordPair.asPascalCase)," sebagai tempat text random muncul. Membuat stateful widget 
+    
     class RandomWords extends StatefulWidget {
       @override
       _RandomWordsState createState() => _RandomWordsState();
@@ -35,11 +36,11 @@
       }
     }
    Dalam kode sebelumnya ditambahkan "child: RandomWords()," dibawah baris "child: Text(wordPair.asPascalCase),". Aplikasi kemudian di reload/hot reload yang nantinya akan          memunculkan kata baru setiap di reload. Membuat infinite scroll tambahkan kode ini dalam "class _RandomWordsState extends State<RandomWords>"
-  class _RandomWordsState extends State<RandomWords> {
-    final _suggestions = <WordPair>[];
-    final _biggerFont = const TextStyle(fontSize: 18.0);
-    // ···
-  }
+	  class _RandomWordsState extends State<RandomWords> {
+	    final _suggestions = <WordPair>[];
+	    final _biggerFont = const TextStyle(fontSize: 18.0);
+	    // ···
+	  }
   _suggestion berfungsi menyimpan sugesti kata yang sudah muncul, sedangkan _biggerfont membuat text lebih besar. Tambahkan _buildSuggestion
   Widget _buildSuggestions() {
   return ListView.builder(
